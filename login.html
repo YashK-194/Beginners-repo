@@ -1,96 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login Page Demo</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stylish Login Form</title>
+    <style>
+      /* ===== Reset and Layout ===== */
+      * {
+        box-sizing: border-box;
+      }
 
-    .login-box {
-      background: white;
-      padding: 20px 25px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 320px;
-    }
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #43cea2, #185a9d);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
 
-    h2 {
-      text-align: center;
-    }
+      /* ===== Glassmorphic Card ===== */
+      .login-box {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        padding: 40px 35px;
+        width: 100%;
+        max-width: 400px;
+        color: #fff;
+        animation: slideUp 0.8s ease;
+      }
 
-    label {
-      display: block;
-      margin-top: 10px;
-      font-size: 14px;
-    }
+      @keyframes slideUp {
+        from {
+          transform: translateY(30px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
 
-    input, select {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
+      h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: 700;
+        font-size: 26px;
+        color: #fff;
+        letter-spacing: 1px;
+      }
 
-    input[type="radio"], input[type="checkbox"] {
-      width: auto;
-      margin-right: 5px;
-    }
+      /* ===== Labels ===== */
+      label {
+        display: block;
+        margin-top: 18px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #e8f0fe;
+      }
 
-    .btn {
-      width: 100%;
-      padding: 10px;
-      margin-top: 15px;
-      border: none;
-      background-color: #4CAF50;
-      color: white;
-      font-size: 15px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+      /* ===== Inputs & Select ===== */
+      input:not([type="radio"]):not([type="checkbox"]),
+      select {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        font-size: 15px;
+        margin-top: 5px;
+        outline: none;
+        transition: 0.3s;
+      }
 
-    .btn:hover {
-      background-color: #45a049;
-    }
-  </style>
-</head>
-<body>
-  <div class="login-box">
-    <h2>Login Form</h2>
-    <form action="/login" method="POST">
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required />
+      input::placeholder {
+        color: rgba(255, 255, 255, 0.8);
+      }
 
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required />
+      input:focus,
+      select:focus {
+        background: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+        transform: scale(1.02);
+      }
 
-      <label for="role">Select Role:</label>
-      <select id="role" name="role">
-        <option value="user">User</option>
-        <option value="admin">Admin</option>
-        <option value="guest">Guest</option>
-      </select>
+      /* ===== Gender Radio Group ===== */
+      .radio-group {
+        display: flex;
+        align-items: center;
+        gap: 25px; /* space between male and female */
+        margin-top: 10px;
+      }
 
-      <label>Gender:</label>
-      <input type="radio" id="male" name="gender" value="male" />
-      <label for="male">Male</label>
-      <input type="radio" id="female" name="gender" value="female" />
-      <label for="female">Female</label>
+      .radio-option {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 500;
+        color: #f0f0f0;
+      }
 
-      <label>
-        <input type="checkbox" name="remember" /> Remember me
-      </label>
+      input[type="radio"],
+      input[type="checkbox"] {
+        accent-color: #00f2fe; /* Modern blue accent */
+        transform: scale(1.2);
+        cursor: pointer;
+      }
 
-      <input type="submit" value="Login" class="btn" />
-    </form>
-  </div>
-</body>
+      /* ===== Error Messages ===== */
+      .error-message {
+        color: #ff7f7f;
+        font-size: 12px;
+        margin-top: 5px;
+        display: none;
+      }
+
+      /* ===== Checkbox Label ===== */
+      .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 15px;
+        font-weight: 500;
+        color: #f0f0f0;
+        cursor: pointer;
+      }
+
+      /* ===== Button Styling ===== */
+      .btn {
+        width: 100%;
+        margin-top: 30px;
+        padding: 14px;
+        background: linear-gradient(135deg, #11998e, #38ef7d);
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+      }
+
+      .btn:hover {
+        background: linear-gradient(135deg, #00f2fe, #4facfe);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .btn:active {
+        transform: translateY(1px);
+      }
+
+      /* ===== Responsive Design ===== */
+      @media (max-width: 500px) {
+        .login-box {
+          padding: 30px 25px;
+        }
+        .radio-group {
+          gap: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-box">
+      <h2>Welcome Back 👋</h2>
+      <form id="loginForm" action="/login" method="POST">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="you@example.com"
+          required
+        />
+        <p id="emailError" class="error-message">
+          Enter a valid email address.
+        </p>
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="••••••••"
+          required
+        />
+        <p id="passwordError" class="error-message">
+          Password must be at least 6 characters.
+        </p>
+
+        <label for="role">Select Role</label>
+        <select id="role" name="role">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+          <option value="guest">Guest</option>
+        </select>
+
+        <label style="margin-top: 20px">Gender</label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" id="male" name="gender" value="male" />
+            Male
+          </label>
+          <label class="radio-option">
+            <input type="radio" id="female" name="gender" value="female" />
+            Female
+          </label>
+        </div>
+
+        <label class="checkbox-label">
+          <input type="checkbox" id="remember" name="remember" /> Remember me
+        </label>
+
+        <button type="submit" class="btn">Login</button>
+      </form>
+    </div>
+
+    <script>
+      const form = document.getElementById("loginForm");
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+      const emailError = document.getElementById("emailError");
+      const passwordError = document.getElementById("passwordError");
+
+      form.addEventListener("submit", function (event) {
+        let isValid = true;
+
+        if (!emailInput.value.includes("@") || emailInput.value.length < 5) {
+          emailError.style.display = "block";
+          emailInput.style.border = "1px solid #ff7f7f";
+          isValid = false;
+        } else {
+          emailError.style.display = "none";
+          emailInput.style.border = "none";
+        }
+
+        if (passwordInput.value.length < 6) {
+          passwordError.style.display = "block";
+          passwordInput.style.border = "1px solid #ff7f7f";
+          isValid = false;
+        } else {
+          passwordError.style.display = "none";
+          passwordInput.style.border = "none";
+        }
+
+        if (!isValid) {
+          event.preventDefault();
+        }
+      });
+    </script>
+  </body>
 </html>
