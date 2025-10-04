@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,90 +8,145 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
+      background: linear-gradient(135deg, #000000, #4d94d0);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      margin: 0;
+      transition: background 0.5s;
     }
 
     .login-box {
       background: white;
-      padding: 20px 25px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 320px;
+      padding: 25px 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 350px;
     }
 
     h2 {
       text-align: center;
+      color: #333;
+      margin-bottom: 20px;
     }
 
     label {
       display: block;
-      margin-top: 10px;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
       font-size: 14px;
     }
 
-    input, select {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    input[type="radio"], input[type="checkbox"] {
+    input[type="radio"],
+    input[type="checkbox"] {
       width: auto;
-      margin-right: 5px;
+      margin-right: 8px;
     }
 
     .btn {
       width: 100%;
-      padding: 10px;
-      margin-top: 15px;
+      padding: 12px;
+      margin-top: 20px;
       border: none;
       background-color: #4CAF50;
       color: white;
-      font-size: 15px;
-      border-radius: 4px;
+      font-size: 16px;
+      border-radius: 5px;
       cursor: pointer;
+      transition: transform 0.2s, background 0.3s;
     }
 
     .btn:hover {
       background-color: #45a049;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 480px) {
+      .login-box {
+        margin: 20px;
+        padding: 20px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      input,
+      select,
+      .btn {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="login-box">
+  <div class="login-box" role="main" aria-label="Login Form">
     <h2>Login Form</h2>
-    <form action="/login" method="POST">
+    <form action="/login" method="POST" onsubmit="return validateForm()" novalidate>
       <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required />
+      <input type="email" id="email" name="email" required aria-required="true" />
 
       <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required />
+      <input type="password" id="password" name="password" required aria-required="true" />
 
       <label for="role">Select Role:</label>
-      <select id="role" name="role">
+      <select id="role" name="role" aria-label="Select user role">
         <option value="user">User</option>
         <option value="admin">Admin</option>
         <option value="guest">Guest</option>
       </select>
-
-      <label>Gender:</label>
-      <input type="radio" id="male" name="gender" value="male" />
-      <label for="male">Male</label>
-      <input type="radio" id="female" name="gender" value="female" />
-      <label for="female">Female</label>
-
+<div>
+  <label>Gender:</label>
+  <div style="display: flex; align-items: center; gap: 15px; margin-top: 5px;">
+    <div style="display: flex; align-items: baseline;">
+      <input type="radio" id="male" name="gender" value="male" style="margin: 0; vertical-align: middle;" />
+      <label for="male" style="margin-left: 5px; vertical-align: middle;">Male</label>
+    </div>
+    <div style="display: flex; align-items: baseline;">
+      <input type="radio" id="female" name="gender" value="female" style="margin: 0; vertical-align: middle;" />
+      <label for="female" style="margin-left: 5px; vertical-align: middle;">Female</label>
+    </div>
+  </div>
+</div>
       <label>
-        <input type="checkbox" name="remember" /> Remember me
+        <input type="checkbox" name="remember" aria-label="Remember me" /> Remember me
       </label>
 
       <input type="submit" value="Login" class="btn" />
     </form>
   </div>
+
+  <script>
+    function validateForm() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return false;
+      }
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        return false;
+      }
+      return true;
+    }
+  </script>
 </body>
+
 </html>
