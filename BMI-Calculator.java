@@ -16,6 +16,20 @@ public class BMICalculator {
         
         System.out.printf("Your BMI is: %.2f%n", bmi);
         
+        // --- New Feature: Interpret the BMI Score ---
+        String category;
+        if (bmi < 18.5) {
+            category = "Underweight";
+        } else if (bmi < 25) {
+            category = "Normal weight";
+        } else if (bmi < 30) {
+            category = "Overweight";
+        } else {
+            category = "Obese";
+        }
+        
+        System.out.println("Health Category: " + category);
+        
         sc.close();
     }
 }
